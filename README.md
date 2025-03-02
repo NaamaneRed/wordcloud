@@ -6,4 +6,5 @@ The words should come from a server.
 Requieris:
 
 FFmpeg installed on your computer, to create the video.
+
 A list of words from a server, in this case we used a MySQL-Database.
