@@ -1,6 +1,6 @@
 <?php
 // Pfad zur Videodatei
-$videoPath = 'C:/xampp/htdocs/use_case4_Wortwolke/wordcloud_video.mp4';
+$videoPath = 'Replace_with_Path_to_your_Video';
 
 // Standardantwort
 $response = ['video_ready' => false];
