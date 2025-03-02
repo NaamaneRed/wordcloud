@@ -1,9 +1,9 @@
 <?php
 // Verbindung zu lokalen MySQL-DB
-$servername = "localhost";
-$username = "root";
+$servername = "Replace_with_Servername";
+$username = "";
 $password = ""; 
-$dbname = "usecase4";
+$dbname = "";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -40,16 +40,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($result->num_rows > 0) {
             $datum = date('Y-m-d H:i:s');
-            $insertSql = "INSERT INTO antworten (eingabe, datum) VALUES (?, ?)";
+            $insertSql = "INSERT INTO [Replace_with_table_of_your_words] (eingabe, datum) VALUES (?, ?)";
             
             $insertStmt = $conn->prepare($insertSql);
             if ($insertStmt) {
                 $insertStmt->bind_param("ss", $userInput, $datum);
                 if ($insertStmt->execute()) {
-                    $updateSql = "UPDATE antworten SET eingabe = eingabe";
+                    $updateSql = "UPDATE [Replace_with_table_of_your_words] SET eingabe = eingabe";
                     $conn->query($updateSql);
                     // wordcloud_video.py ausführen für Video-Erstellung
-                    $pythonScriptPath = 'C:/xampp/htdocs/use_case4_Wortwolke/wordcloud_video.py';
+                    $pythonScriptPath = 'Replace_with_path_to_your_video';
                     $command = escapeshellcmd("python3 $pythonScriptPath");
                     $output = [];
                     $retval = null;
