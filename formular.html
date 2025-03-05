@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Response form</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      margin: 0;
+    }
+
+    h1 {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      position: absolute;
+      bottom: 30px;
+      width: 50%;
+      max-width: 500px;
+      min-width: 300px;
+    }
+
+    video {
+      width: 80%;
+      max-width: 600px;
+      height: auto;
+      margin-top: 20px; /* Space under the heading */
+      margin-bottom: 20px; /* Distance over input field and button */
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      display: none;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      color: #fff;
+      background-color: #007BFF;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Response form</h1>
+
+  <video id="videoPlayer" controls>
+    <source src="Path_to_your_created_video_file" type="video/mp4">
+    Your browser does not support this video format.
+  </video>
+
+  <div class="container">
+    <input type="text" id="eingabe" placeholder="Please enter your answer">
+    <button onclick="senden()">Submit</button>
+  </div>
+  <script>
+    async function senden() {
+      const eingabe = document.getElementById('eingabe').value.trim();
+      if (eingabe === '') {
+        alert('Please enter your answer');
+        return;
+      }
+
+      try {
+        const response = await fetch('db_connection.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ eingabe }),
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          const videoPlayer = document.getElementById('videoPlayer');
+          videoPlayer.style.display = 'block';
+          videoPlayer.src = 'Path_to_your_created_video_file?rand=' + new Date().getTime();
+          videoPlayer.load();
+          videoPlayer.play();
+          document.getElementById('eingabe').value = ''; // Empty the input field
+        } else {
+          alert(result.message || 'An error has occurred.');
+        }
+      } catch (error) {
+        console.error('Error processing request:', error);
+        alert('An error has occurred.');
+      }
+    }
+
+    async function checkVideoStatus() {
+      const response = await fetch('check_video_status.php');
+      const result = await response.json();
+      if (result.video_ready) {
+        const videoPlayer = document.getElementById('videoPlayer');
+        videoPlayer.src = 'Path_to_your_created_video_file?rand=' + new Date().getTime();
+        videoPlayer.load();
+        videoPlayer.play();
+      } else {
+        setTimeout(checkVideoStatus, 1000); // Check after 1 sec
+      }
+    }
+    checkVideoStatus();
+  </script>
+</body>
+
+</html>
