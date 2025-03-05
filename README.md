@@ -8,7 +8,11 @@ The input html form was left in a neutral design so that individual adjustments 
 Requirements:
 
 Two tables are required, ideally stored in a MySQL database. Once the table 'whitelist' and the table 'antworten'.
+
 FFmpeg 6.1.1 must be installed previously.
+
 PHP 7.2.5 or higher
+
 MySQL 5.7.33 or higher
-Python 3.13.0 
+
+Python 3.13.0 or higher
