@@ -1,4 +1,4 @@
-This project generates a video which shows a wordcloud. It comes with a input hmtl formular and two php APIs, which manage the interaction between the scripts.
+This project generates a video which shows a wordcloud. It comes with an input hmtl formular and two php APIs, which manage the interaction between the scripts.
 
 You can use the input html form to enter words which will be saved in your table (in your database). The words from the table are used by the wordcloud_video.py script to generate a wordcloud.
 
