@@ -12,7 +12,7 @@ The input html form was left in a neutral design so that individual adjustments 
 
 Requirements:
 
-Two tables are required, ideally stored in a MySQL database. Once the table 'whitelist' and the table 'antworten', which need to be created in your database.
+Two tables are required, ideally stored in a MySQL database. Once the table 'whitelist' and the table 'antworten', which needs to be created in your database.
 
 FFmpeg 6.1.1 must be installed previously.
 
